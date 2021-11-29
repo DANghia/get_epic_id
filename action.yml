@@ -1,0 +1,12 @@
+name: 'Azura API'
+description: 'Use Azura API and get Epic Id'
+inputs:
+  commit-mess:  # id of input
+    description: 'Who to greet'
+    required: true
+outputs:
+  time: # id of output
+    description: 'EPIC ID'
+runs:
+  using: 'node12'
+  main: 'index.js'

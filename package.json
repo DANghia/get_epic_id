@@ -1,0 +1,24 @@
+{
+  "name": "get_epic_id",
+  "version": "1.0.0",
+  "description": "Get azura devops epic id",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DANghia/get_epic_id.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DANghia/get_epic_id/issues"
+  },
+  "homepage": "https://github.com/DANghia/get_epic_id#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "request": "^2.88.2"
+  }
+}
