@@ -50,8 +50,8 @@ async function get_method(id){
 
 
 try {
-    const commit_mess = core.getInput('commit-mess');
-    // const commit_mess = "AB#2031: transformation: fix output step"
+    // const commit_mess = core.getInput('commit-mess');
+    const commit_mess = "AB#2031: transformation: fix output step"
     let a = commit_mess.match(/AB#(\d+)/)
     let item = a[1]
 
@@ -64,7 +64,7 @@ try {
         await console.log("cccccccccccccccccccccccccccc"+epic)
         // read name epic from id epic
         let dataEpic = require('./epic.json');
-        await core.setOutput("id", dataEpic[epic]);
+        await core.setOutput("id", dataEpic[epic] || 'Fail');
 
         return epic
     }
