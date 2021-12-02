@@ -62,7 +62,9 @@ try {
         await console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb"+feature)
         let epic = await get_method(feature)
         await console.log("cccccccccccccccccccccccccccc"+epic)
-        await core.setOutput("id", epic);
+        // read name epic from id epic
+        let dataEpic = require('./epic.json');
+        await core.setOutput("id", dataEpic[epic]);
 
         return epic
     }
