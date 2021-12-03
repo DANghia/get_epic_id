@@ -18,7 +18,6 @@ function options_function(id) {
 }
 
 async function get_method(id){
-    console.log('get_method(id){')
     var options = options_function(id)
     const re = new Promise(function(resolve, reject) {
         request(options, async function (error, response) {
@@ -29,8 +28,13 @@ async function get_method(id){
             } 
             let body = response.body
             let ab = body.match(/,"System.Parent":(\d+)/)
-            let id = ab[1]
-            resolve(id)
+            let id1
+            try{
+                id1 = ab[1]
+            } catch {
+                id1 = id
+            }
+            resolve(id1)
           });
     });
     return re;
@@ -50,30 +54,34 @@ async function get_method(id){
 
 
 try {
-    const commit_mess = core.getInput('commit-mess');
-    // const commit_mess = "AB#2031: transformation: fix output step"
+    // const commit_mess = core.getInput('commit-mess');
+    const commit_mess = "AB#2071"
     let a = commit_mess.match(/AB#(\d+)/)
     let item = a[1]
 
     async function get_epic_id(){
-        let user_story = await get_method(item)
-        await console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa"+user_story)
-        let feature = await get_method(user_story)
-        await console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb"+feature)
-        let epic = await get_method(feature)
-        await console.log("cccccccccccccccccccccccccccc"+epic)
-        // read name epic from id epic
+        let user_story
+        for (let i = 0; i<3; i++){
+            user_story = await get_method(item)
+            if (user_story == item){
+                
+                break
+            } else {
+                item = user_story
+            }
+        }
         let dataEpic = require('./epic.json');
-        await core.setOutput("id", dataEpic[epic] || 'Fail');
-
-        return epic
+        await core.setOutput("id", dataEpic[user_story] || 'Fail');
+        // let user_story = await get_method(item)
+        // await console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaa"+user_story)
+        // let feature = await get_method(user_story)
+        // await console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb"+feature)
+        // let epic = await get_method(feature)
+        // await console.log("cccccccccccccccccccccccccccc"+epic)
+        // // read name epic from id epic
+        // let dataEpic = require('./epic.json');
+        // await core.setOutput("id", dataEpic[epic] || 'Fail');
     }
-    // const myPromise = new Promise((resolve, reject) => {
-    //     console.log(get_epic_id())
-    //     core.setOutput("id", get_epic_id());
-
-    //   });
-    // core.setOutput("id", original);
     get_epic_id()
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
