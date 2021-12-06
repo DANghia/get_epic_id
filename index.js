@@ -54,8 +54,8 @@ async function get_method(id){
 
 
 try {
-    // const commit_mess = core.getInput('commit-mess');
-    const commit_mess = "AB#2071"
+    const commit_mess = core.getInput('commit-mess');
+//     const commit_mess = "AB#2071"
     let a = commit_mess.match(/AB#(\d+)/)
     let item = a[1]
 
